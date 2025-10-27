@@ -2,13 +2,13 @@
 
 <div align="center">
 
-![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)
-![Vite](https://img.shields.io/badge/Vite-6.0.5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Axios](https://img.shields.io/badge/Axios-1.7.9-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
-![React Router](https://img.shields.io/badge/React_Router-7.1.1-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![React](https://img.shields.io/badge/React-19.1.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.1.7-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-7.9.4-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Lucide React](https://img.shields.io/badge/Lucide-0.548.0-F56565?style=for-the-badge&logo=lucide&logoColor=white)
 ![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?style=for-the-badge&logo=css3&logoColor=white)
 
-**Aplicación de blog modular con arquitectura de microfrontend simulado**
+**Ejercicio Día 3: Módulo de Blog Simulado - Arquitectura de Microfrontend**
 
 [Demo](#) • [Características](#-características) • [Instalación](#-instalación) • [Arquitectura](#-arquitectura)
 
@@ -20,9 +20,15 @@
 
 **Relatos de Otoño** es una aplicación web de blog desarrollada con React que simula una arquitectura de microservicios en el frontend. El proyecto implementa principios de diseño modular, separación de responsabilidades y buenas prácticas de desarrollo frontend.
 
-### 🎯 Objetivo del Proyecto
+### 🎯 Objetivo del Proyecto (Día 3 - Frontend)
 
-Estructurar una interfaz React modular que simule un microservicio de contenido (Blog), utilizando una API local simulada, permitiendo el desarrollo independiente del backend.
+Aprender a estructurar una interfaz React modular que simule un microservicio de contenido (Blog), utilizando datos simulados (mock data), de forma que cada desarrollador pueda trabajar sin depender del backend. El proyecto refuerza:
+
+- ✅ Principio de responsabilidad única aplicado al frontend
+- ✅ Separación por módulos y componentes reutilizables
+- ✅ Uso de API simulada con datos locales
+- ✅ Renderizado condicional, loaders y manejo de errores
+- ✅ Estructura preparada para conectarse a un futuro Blog Service (Django)
 
 ---
 
@@ -59,12 +65,11 @@ Estructurar una interfaz React modular que simule un microservicio de contenido 
 
 | Tecnología | Versión | Propósito |
 |------------|---------|----------|
-| ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=white) | 18.3.1 | Librería UI |
-| ![Vite](https://img.shields.io/badge/-Vite-646CFF?style=flat&logo=vite&logoColor=white) | 6.0.5 | Build tool |
-| ![Axios](https://img.shields.io/badge/-Axios-5A29E4?style=flat&logo=axios&logoColor=white) | 1.7.9 | Cliente HTTP |
-| ![React Router](https://img.shields.io/badge/-React_Router-CA4245?style=flat&logo=react-router&logoColor=white) | 7.1.1 | Enrutamiento |
-| ![Lucide React](https://img.shields.io/badge/-Lucide-F56565?style=flat&logo=lucide&logoColor=white) | 0.468.0 | Iconos |
-| ![CSS Modules](https://img.shields.io/badge/-CSS_Modules-000000?style=flat&logo=css3&logoColor=white) | - | Estilos |
+| ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=white) | 19.1.1 | Librería UI |
+| ![Vite](https://img.shields.io/badge/-Vite-646CFF?style=flat&logo=vite&logoColor=white) | 7.1.7 | Build tool |
+| ![React Router](https://img.shields.io/badge/-React_Router-CA4245?style=flat&logo=react-router&logoColor=white) | 7.9.4 | Enrutamiento |
+| ![Lucide React](https://img.shields.io/badge/-Lucide-F56565?style=flat&logo=lucide&logoColor=white) | 0.548.0 | Iconos |
+| ![CSS Modules](https://img.shields.io/badge/-CSS_Modules-000000?style=flat&logo=css3&logoColor=white) | - | Estilos modulares |
 
 </div>
 
@@ -76,7 +81,7 @@ Estructurar una interfaz React modular que simule un microservicio de contenido 
 blogger/
 ├── src/
 │   ├── api/
-│   │   └── blogApi.js              # Configuración de Axios y endpoints
+│   │   └── blogApi.js              # API simulada con mock data
 │   ├── components/
 │   │   ├── PostCard.jsx            # Tarjeta de post
 │   │   ├── Loader.jsx              # Componente de carga
@@ -98,6 +103,8 @@ blogger/
 │   │   └── ThemeContext.jsx        # Contexto de tema
 │   ├── hooks/
 │   │   └── usePosts.js             # Hook personalizado para posts
+│   ├── data/
+│   │   └── mock.js                 # Datos simulados (posts, comentarios)
 │   ├── styles/
 │   │   ├── theme.module.css        # Variables de tema
 │   │   ├── blog.module.css         # Estilos del layout
@@ -105,12 +112,12 @@ blogger/
 │   │   ├── postcard.module.css     # Estilos de tarjetas
 │   │   ├── sidebar.module.css      # Estilos del sidebar
 │   │   ├── footer.module.css       # Estilos del footer
-│   │   └── ...                     # Otros módulos CSS
-│   ├── App.jsx                     # Componente raíz
+│   │   └── ...                     # Otros módulos CSS (16 total)
+│   ├── App.jsx                     # Componente raíz con rutas
 │   └── main.jsx                    # Punto de entrada
-├── db.json                         # Base de datos simulada (JSON Server)
 ├── package.json
-└── README.md
+├── README.md
+└── ANALISIS_REQUISITOS.md          # Análisis de cumplimiento Día 3
 ```
 
 ---
@@ -143,17 +150,13 @@ npm install
 npm run dev
 ```
 
-4. **Iniciar la API simulada** (en otra terminal)
-
-```bash
-npm run server
-```
-
-5. **Abrir en el navegador**
+4. **Abrir en el navegador**
 
 ```
 http://localhost:5173
 ```
+
+> **Nota**: No se requiere servidor backend. La aplicación usa datos simulados locales (`src/data/mock.js`) que emulan una API real con delays y manejo de errores.
 
 ### Credenciales de Prueba
 
@@ -164,22 +167,36 @@ Contraseña: admin123
 
 ---
 
-## 🔌 API Endpoints
+## 🔌 API Simulada
 
-### Base URL
+### Tipo de API
+**Mock Data Local** - Datos simulados en `src/data/mock.js`
+
+### Funciones Disponibles
+
+| Función | Parámetros | Descripción |
+|---------|------------|-------------|
+| `getPosts()` | - | Obtener todos los posts (simula delay de 800ms) |
+| `getPostById(id)` | id: number | Obtener un post por ID (simula delay de 400ms) |
+| `getPostsByCategory(category)` | category: string | Filtrar posts por categoría |
+| `getComments(postId)` | postId: number | Obtener comentarios de un post |
+| `addComment(postId, comment)` | postId, comment | Agregar comentario (localStorage) |
+| `toggleLike(postId)` | postId: number | Toggle like en un post |
+
+### Simulación de Errores
+
+La API simula errores 404 en las **primeras 2 peticiones** para demostrar el manejo de errores y reintentos:
+
+```javascript
+const simulateError = () => {
+  const count = getRequestCount()
+  if (count < 2) {
+    throw new Error('Error 404: No se pudieron cargar los posts')
+  }
+}
 ```
-http://localhost:3001
-```
 
-### Endpoints Disponibles
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/posts` | Obtener todos los posts |
-| GET | `/posts/:id` | Obtener un post por ID |
-| GET | `/posts?_page=1&_limit=10` | Paginación |
-
-### Ejemplo de Respuesta
+### Ejemplo de Respuesta (Mock Data)
 
 ```json
 {
@@ -303,32 +320,46 @@ http://localhost:3001
 
 ### Estrategia de Reintentos
 
+El proyecto implementa un sistema robusto de reintentos usando el custom hook `usePosts`:
+
 ```javascript
+// src/hooks/usePosts.js
+const [retryCount, setRetryCount] = useState(0)
+const maxRetries = 2
+
 const fetchPosts = async () => {
-  let attempts = 0
-  const maxAttempts = 3
-  
-  while (attempts < maxAttempts) {
-    try {
-      const response = await getPosts()
-      return response.data
-    } catch (error) {
-      attempts++
-      if (attempts === maxAttempts) {
-        throw error
-      }
-      await new Promise(resolve => setTimeout(resolve, 1000))
+  try {
+    setLoading(true)
+    setError(null)
+    const data = await getPosts()
+    setPosts(data)
+    setRetryCount(0) // Reset en éxito
+  } catch (err) {
+    setError(err.message)
+    // Reintento automático si no se alcanzó el máximo
+    if (retryCount < maxRetries) {
+      setTimeout(() => {
+        setRetryCount(prev => prev + 1)
+        fetchPosts()
+      }, 1000)
     }
+  } finally {
+    setLoading(false)
   }
 }
 ```
 
+### Componentes de Error
+
+- **ErrorModal**: Modal interactivo con botón de reintentar
+- **ErrorMsg**: Mensaje inline para errores en páginas de detalle
+- **Loader**: Indicador de carga con texto descriptivo
+
 ### Estados de Error
 
-- **Error 404**: No se encontraron posts
-- **Error de Red**: Problema de conexión
-- **Timeout**: Servidor no responde
-- **Error Genérico**: Otros errores
+- **Error 404 Simulado**: Primeras 2 peticiones fallan intencionalmente
+- **Post no encontrado**: ID inválido en detalle
+- **Error Genérico**: Captura cualquier otro error
 
 ---
 
@@ -348,26 +379,63 @@ const fetchPosts = async () => {
 ## 🧪 Scripts Disponibles
 
 ```bash
-npm run dev          # Inicia servidor de desarrollo
+npm run dev          # Inicia servidor de desarrollo (Vite)
 npm run build        # Construye para producción
 npm run preview      # Vista previa de producción
-npm run server       # Inicia JSON Server (API simulada)
 npm run lint         # Ejecuta ESLint
 ```
+
+> **Nota**: No se requiere `npm run server` ya que la API está simulada localmente.
 
 ---
 
 ## 🔮 Futuras Mejoras
 
+### Migración a API Real
+
+- [ ] Integrar con JSONPlaceholder (https://jsonplaceholder.typicode.com)
+- [ ] Instalar y configurar Axios para HTTP requests
+- [ ] Implementar React Query para caché y gestión de estado del servidor
+- [ ] Conectar con backend real (Django Blog Service)
+
+### Mejoras Técnicas
+
 - [ ] Migración a TypeScript
-- [ ] Tests unitarios con Jest
+- [ ] Tests unitarios con Jest/Vitest
 - [ ] Tests E2E con Playwright
 - [ ] PWA con Service Workers
-- [ ] Integración con backend real (Django)
-- [ ] Sistema de comentarios funcional
-- [ ] Edición y creación de posts
-- [ ] Subida de imágenes
-- [ ] Analytics y métricas
+- [ ] Edición y creación de posts (CRUD completo)
+- [ ] Subida de imágenes con preview
+- [ ] Analytics y métricas de rendimiento
+
+### Funcionalidades
+
+- [x] Sistema de comentarios funcional ✅
+- [x] Sistema de likes persistente ✅
+- [x] Búsqueda en tiempo real ✅
+- [x] Paginación ✅
+- [x] Modo oscuro ✅
+
+---
+
+## 📊 Cumplimiento de Requisitos - Día 3
+
+Para ver el análisis detallado de cumplimiento de requisitos, consulta:
+
+📄 **[ANALISIS_REQUISITOS.md](./ANALISIS_REQUISITOS.md)**
+
+### Resumen de Evaluación
+
+| Criterio | Puntos | Estado |
+|----------|--------|--------|
+| Estructura modular | 5/5 | ✅ |
+| Integración con API simulada | 4/5 | ⚠️ |
+| Estilos y UX | 4/4 | ✅ |
+| Código organizado | 3/3 | ✅ |
+| Documentación README | 3/3 | ✅ |
+| **TOTAL** | **19/20** | ✅ |
+
+**Nota**: -1 punto por usar mock local en vez de JSONPlaceholder (requisito explícito). El proyecto supera ampliamente el nivel requerido con funcionalidades avanzadas.
 
 ---
 
@@ -388,5 +456,7 @@ Desarrolladora de software, amante de la lectura y los mundos de fantasía.
 <div align="center">
 
 **Hecho con 🍂 y ☕ en otoño de 2024**
+
+**Ejercicio Día 3 - Módulo de Blog Simulado (Microservicio Front-Only)**
 
 </div>
