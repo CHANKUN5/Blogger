@@ -1,0 +1,43 @@
+:root[data-theme="light"] {
+  --bg-primary: #f5e6d3;
+  --bg-secondary: #e8d4b8;
+  --bg-gradient: linear-gradient(135deg, #f5e6d3 0%, #e8d4b8 100%);
+  --text-primary: #4a3f35;
+  --text-secondary: #6b5d52;
+  --accent: #8f2c24;
+  --accent-hover: #d64c42;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --shadow: rgba(0, 0, 0, 0.1);
+  --overlay: rgba(0, 0, 0, 0.3);
+  --sidebar-bg: rgba(255, 255, 255, 0.5);
+  --sidebar-border: #8f2c24;
+  --footer-bg: #8f2c24;
+  --footer-text: #f5e6d3;
+  --footer-icon-bg: #f5e6d3;
+  --footer-icon-hover: #e8d4b8;
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #1a1f3a;
+  --bg-secondary: #2d3561;
+  --bg-gradient: linear-gradient(135deg, #1a1f3a 0%, #2d3561 100%);
+  --text-primary: #e8d4b8;
+  --text-secondary: #c9b99a;
+  --accent: #F1A52F;
+  --accent-hover: #ffc04d;
+  --card-bg: rgba(45, 53, 97, 0.7);
+  --card-border: rgba(241, 165, 47, 0.2);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --overlay: rgba(0, 0, 0, 0.5);
+  --sidebar-bg: rgba(45, 53, 97, 0.5);
+  --sidebar-border: #F1A52F;
+  --footer-bg: #2d3561;
+  --footer-text: #e8d4b8;
+  --footer-icon-bg: #F1A52F;
+  --footer-icon-hover: #ffc04d;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

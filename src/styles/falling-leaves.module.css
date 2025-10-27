@@ -1,0 +1,46 @@
+.leavesContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  top: -10%;
+  width: auto;
+  height: auto;
+  max-width: 50px;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translateY(20vh) translateX(-20px) rotate(45deg);
+  }
+  40% {
+    transform: translateY(40vh) translateX(20px) rotate(90deg);
+  }
+  60% {
+    transform: translateY(60vh) translateX(-20px) rotate(180deg);
+  }
+  80% {
+    transform: translateY(80vh) translateX(20px) rotate(270deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(110vh) translateX(-20px) rotate(360deg);
+  }
+}
