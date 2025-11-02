@@ -9,6 +9,7 @@ import FallingLeaves from './FallingLeaves'
 import FallingRain from './FallingRain'
 import Footer from './Footer'
 import EffectsToggle from '../components/EffectsToggle'
+import ContactModal from '../components/ContactModal'
 import styles from '../styles/blog.module.css'
 
 export default function BlogLayout() {
@@ -40,7 +41,7 @@ export default function BlogLayout() {
       {effectsActive && <FallingLeaves />}
       {effectsActive && theme === 'dark' && <FallingRain />}
       
-      <EffectsToggle onToggle={setEffectsActive} />
+      <ContactModal />
       
       <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
         <div className={styles.headerContent}>
@@ -57,6 +58,8 @@ export default function BlogLayout() {
                 className={styles.searchInput}
               />
             </div>
+            
+            <EffectsToggle onToggle={setEffectsActive} />
             
             <button 
               className={styles.menuBtn}

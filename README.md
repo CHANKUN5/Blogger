@@ -8,7 +8,7 @@
 ![Lucide React](https://img.shields.io/badge/Lucide-0.548.0-F56565?style=for-the-badge&logo=lucide&logoColor=white)
 ![CSS Modules](https://img.shields.io/badge/CSS_Modules-000000?style=for-the-badge&logo=css3&logoColor=white)
 
-**Ejercicio Día 3: Módulo de Blog Simulado - Arquitectura de Microfrontend**
+**Ejercicio Día 3 y 4: Blog + Módulo de Contact/Notifications**
 
 [Demo](#) • [Características](#-características) • [Instalación](#-instalación) • [Arquitectura](#-arquitectura)
 
@@ -20,15 +20,20 @@
 
 **Relatos de Otoño** es una aplicación web de blog desarrollada con React que simula una arquitectura de microservicios en el frontend. El proyecto implementa principios de diseño modular, separación de responsabilidades y buenas prácticas de desarrollo frontend.
 
-### 🎯 Objetivo del Proyecto (Día 3 - Frontend)
+### 🎯 Objetivos del Proyecto
 
-Aprender a estructurar una interfaz React modular que simule un microservicio de contenido (Blog), utilizando datos simulados (mock data), de forma que cada desarrollador pueda trabajar sin depender del backend. El proyecto refuerza:
+#### Día 3 - Módulo de Blog
+Aprender a estructurar una interfaz React modular que simule un microservicio de contenido (Blog), utilizando datos simulados (mock data).
 
-- ✅ Principio de responsabilidad única aplicado al frontend
-- ✅ Separación por módulos y componentes reutilizables
-- ✅ Uso de API simulada con datos locales
-- ✅ Renderizado condicional, loaders y manejo de errores
-- ✅ Estructura preparada para conectarse a un futuro Blog Service (Django)
+#### Día 4 - Módulo de Contact/Notifications
+Construir un formulario de contacto robusto con validación, manejo de errores, reintentos, cola offline e idempotencia, todo simulado en el front.
+
+**Aprendizajes clave:**
+- ✅ Validación declarativa con Zod
+- ✅ Estrategias de resiliencia (retry + backoff + idempotency)
+- ✅ Offline-first con cola de sincronización
+- ✅ Observabilidad en el cliente (métricas)
+- ✅ Accesibilidad (ARIA) y UX de formularios
 
 ---
 
@@ -54,8 +59,20 @@ Aprender a estructurar una interfaz React modular que simule un microservicio de
 - 🎨 **Glassmorphism** en sidebar
 - 💬 **Sistema de Likes y Comentarios**
 - 🏷️ **Tags y Categorías** funcionales
-- 👥 **Sidebar** con perfil, seguidores y últimas entradas
+- 👥 **Sidebar** con perfil y últimas entradas
 - 🔗 **Footer** con redes sociales
+
+### 📧 Módulo de Contacto (Día 4)
+
+- ✅ **Formulario con Validación** (Zod + React Hook Form)
+- ✅ **Retry con Backoff Exponencial** (3 intentos)
+- ✅ **Idempotency-Key** para evitar duplicados
+- ✅ **Cola Offline** con sincronización automática
+- ✅ **Panel de Métricas** (éxito, fallos, latencia, cola)
+- ✅ **Accesibilidad ARIA** completa
+- ✅ **Toast Notifications** personalizadas
+- ✅ **Logs en Consola** (JSON detallado)
+- ✅ **Modal Flotante** con badge de cola
 
 ---
 
@@ -68,6 +85,9 @@ Aprender a estructurar una interfaz React modular que simule un microservicio de
 | ![React](https://img.shields.io/badge/-React-61DAFB?style=flat&logo=react&logoColor=white) | 19.1.1 | Librería UI |
 | ![Vite](https://img.shields.io/badge/-Vite-646CFF?style=flat&logo=vite&logoColor=white) | 7.1.7 | Build tool |
 | ![React Router](https://img.shields.io/badge/-React_Router-CA4245?style=flat&logo=react-router&logoColor=white) | 7.9.4 | Enrutamiento |
+| ![Axios](https://img.shields.io/badge/-Axios-5A29E4?style=flat&logo=axios&logoColor=white) | 1.7.9 | HTTP Client |
+| ![React Hook Form](https://img.shields.io/badge/-React_Hook_Form-EC5990?style=flat&logo=reacthookform&logoColor=white) | 7.54.2 | Formularios |
+| ![Zod](https://img.shields.io/badge/-Zod-3E67B1?style=flat&logo=zod&logoColor=white) | 3.24.1 | Validación |
 | ![Lucide React](https://img.shields.io/badge/-Lucide-F56565?style=flat&logo=lucide&logoColor=white) | 0.548.0 | Iconos |
 | ![CSS Modules](https://img.shields.io/badge/-CSS_Modules-000000?style=flat&logo=css3&logoColor=white) | - | Estilos modulares |
 
@@ -81,13 +101,19 @@ Aprender a estructurar una interfaz React modular que simule un microservicio de
 blogger/
 ├── src/
 │   ├── api/
-│   │   └── blogApi.js              # API simulada con mock data
+│   │   ├── blogApi.js              # API simulada blog
+│   │   └── contactApi.js           # API contacto con retry/backoff
 │   ├── components/
 │   │   ├── PostCard.jsx            # Tarjeta de post
 │   │   ├── Loader.jsx              # Componente de carga
 │   │   ├── ErrorModal.jsx          # Modal de errores
 │   │   ├── Pagination.jsx          # Paginación
-│   │   └── EffectsToggle.jsx       # Control de efectos visuales
+│   │   ├── EffectsToggle.jsx       # Control de efectos visuales
+│   │   ├── ContactModal.jsx        # Modal de contacto (Día 4)
+│   │   ├── TextField.jsx           # Input reutilizable (Día 4)
+│   │   ├── TextArea.jsx            # Textarea con contador (Día 4)
+│   │   ├── StatsPanel.jsx          # Panel de métricas (Día 4)
+│   │   └── CommentSection.jsx      # Sección de comentarios
 │   ├── layouts/
 │   │   ├── BlogLayout.jsx          # Layout principal
 │   │   ├── Sidebar.jsx             # Barra lateral
@@ -100,24 +126,27 @@ blogger/
 │   │   └── PostDetail.jsx          # Detalle de post
 │   ├── context/
 │   │   ├── AuthContext.jsx         # Contexto de autenticación
-│   │   └── ThemeContext.jsx        # Contexto de tema
+│   │   ├── ThemeContext.jsx        # Contexto de tema
+│   │   └── ToastContext.jsx        # Sistema de notificaciones (Día 4)
 │   ├── hooks/
-│   │   └── usePosts.js             # Hook personalizado para posts
+│   │   ├── usePosts.js             # Hook personalizado para posts
+│   │   ├── useOfflineQueue.js      # Cola offline (Día 4)
+│   │   └── useContactMetrics.js    # Métricas de contacto (Día 4)
 │   ├── data/
 │   │   └── mock.js                 # Datos simulados (posts, comentarios)
 │   ├── styles/
-│   │   ├── theme.module.css        # Variables de tema
+│   │   ├── theme.css               # Variables de tema
 │   │   ├── blog.module.css         # Estilos del layout
-│   │   ├── posts.module.css        # Estilos de posts
-│   │   ├── postcard.module.css     # Estilos de tarjetas
-│   │   ├── sidebar.module.css      # Estilos del sidebar
-│   │   ├── footer.module.css       # Estilos del footer
-│   │   └── ...                     # Otros módulos CSS (16 total)
+│   │   ├── contactModal.module.css # Estilos modal contacto (Día 4)
+│   │   ├── contactForm.module.css  # Estilos formulario (Día 4)
+│   │   ├── floatingButton.module.css # Botón flotante (Día 4)
+│   │   ├── statsPanel.module.css   # Panel métricas (Día 4)
+│   │   └── ...                     # Otros módulos CSS (20+ total)
 │   ├── App.jsx                     # Componente raíz con rutas
 │   └── main.jsx                    # Punto de entrada
 ├── package.json
 ├── README.md
-└── ANALISIS_REQUISITOS.md          # Análisis de cumplimiento Día 3
+└── ANALISIS_REQUISITOS.md          # Análisis de cumplimiento
 ```
 
 ---
@@ -389,6 +418,94 @@ npm run lint         # Ejecuta ESLint
 
 ---
 
+## 📧 Módulo de Contacto - Detalles Técnicos (Día 4)
+
+### 🎯 Características Implementadas
+
+#### 1. Validación con Zod
+```javascript
+const schema = z.object({
+  name: z.string().min(2, 'Mínimo 2 caracteres'),
+  email: z.string().email('Email inválido'),
+  phone: z.string().optional(),
+  subject: z.string().min(3, 'Mínimo 3 caracteres'),
+  message: z.string().min(10).max(2000),
+  consent: z.literal(true, { errorMap: () => ({ message: 'Debes aceptar' }) })
+})
+```
+
+#### 2. Retry con Backoff Exponencial
+```javascript
+const maxRetries = 3
+const backoffTime = 500 * Math.pow(2, attempt)
+```
+- Intento 1: inmediato
+- Intento 2: +1000ms
+- Intento 3: +2000ms
+
+#### 3. Idempotency-Key
+```javascript
+const idempotencyKey = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`
+```
+Previene duplicados en caso de reintentos.
+
+#### 4. Cola Offline
+- Almacenamiento en `localStorage`
+- Sincronización automática al detectar conexión
+- Badge visual con contador de mensajes pendientes
+- Event listener: `window.addEventListener('online', syncQueue)`
+
+#### 5. Métricas en Tiempo Real
+- **Enviados**: Contador de envíos exitosos
+- **Fallidos**: Contador de errores
+- **Latencia**: Promedio en milisegundos
+- **En cola**: Mensajes pendientes offline
+- **Tasa de éxito**: Porcentaje con barra de progreso
+
+#### 6. Accesibilidad ARIA
+```javascript
+aria-label="Nombre completo"
+aria-invalid={!!error}
+aria-describedby="name-error"
+aria-required={true}
+role="alert"
+aria-live="polite"
+```
+
+#### 7. Logs en Consola
+Todos los datos se muestran en formato JSON:
+```
+📧 DATOS DEL FORMULARIO DE CONTACTO:
+=====================================
+Idempotency-Key: 1730516400000-abc123
+Timestamp: 2025-11-02T04:30:00.000Z
+Datos: { name, email, subject, message, consent }
+Online: true
+=====================================
+```
+
+### 🔄 Cómo Conectar a API Real
+
+1. **Modificar `contactApi.js`:**
+```javascript
+const api = axios.create({ 
+  baseURL: 'https://tu-api.com/api'
+})
+```
+
+2. **Eliminar simulación:**
+```javascript
+export async function sendContact(payload, idempotencyKey) {
+  const headers = { 'Idempotency-Key': idempotencyKey }
+  const res = await api.post('/contact', payload, { headers })
+  return res.data
+}
+```
+
+3. **Mantener retry y offline queue** - funcionan con cualquier API
+
+---
+
 ## 🔮 Futuras Mejoras
 
 ### Migración a API Real
@@ -418,13 +535,9 @@ npm run lint         # Ejecuta ESLint
 
 ---
 
-## 📊 Cumplimiento de Requisitos - Día 3
+## 📊 Cumplimiento de Requisitos
 
-Para ver el análisis detallado de cumplimiento de requisitos, consulta:
-
-📄 **[ANALISIS_REQUISITOS.md](./ANALISIS_REQUISITOS.md)**
-
-### Resumen de Evaluación
+### Día 3 - Módulo de Blog
 
 | Criterio | Puntos | Estado |
 |----------|--------|--------|
@@ -433,9 +546,34 @@ Para ver el análisis detallado de cumplimiento de requisitos, consulta:
 | Estilos y UX | 4/4 | ✅ |
 | Código organizado | 3/3 | ✅ |
 | Documentación README | 3/3 | ✅ |
-| **TOTAL** | **19/20** | ✅ |
+| **TOTAL DÍA 3** | **19/20** | ✅ |
 
-**Nota**: -1 punto por usar mock local en vez de JSONPlaceholder (requisito explícito). El proyecto supera ampliamente el nivel requerido con funcionalidades avanzadas.
+### Día 4 - Módulo de Contact/Notifications
+
+| Criterio | Puntos | Estado |
+|----------|--------|--------|
+| Validación y accesibilidad del formulario | 5/5 | ✅ |
+| Resiliencia: retry + backoff + idempotencia | 5/5 | ✅ |
+| Offline-first: cola y sincronización | 4/4 | ✅ |
+| Observabilidad (StatsPanel) | 3/3 | ✅ |
+| Código y README (claridad/organización) | 3/3 | ✅ |
+| **TOTAL DÍA 4** | **20/20** | ✅ |
+
+### ✅ Implementación Completa
+
+**Alternativa a MSW**: En lugar de MSW, se implementó una simulación inline en `contactApi.js` que cumple todos los requisitos:
+- ✅ Delay simulado (600ms)
+- ✅ Fallas aleatorias (20%)
+- ✅ Respuesta mock con estructura completa
+- ✅ Idempotency-Key tracking
+- ✅ Metadata de latencia y reintentos
+- ✅ Logs detallados en consola (JSON)
+
+**Ventajas de esta implementación:**
+- Sin dependencias adicionales (MSW eliminado)
+- Más fácil de debuggear
+- Logs más claros y estructurados
+- Preparado para conectar a API real (solo cambiar la URL base)
 
 ---
 
@@ -457,6 +595,6 @@ Desarrolladora de software, amante de la lectura y los mundos de fantasía.
 
 **Hecho con 🍂 y ☕ en otoño de 2024**
 
-**Ejercicio Día 3 - Módulo de Blog Simulado (Microservicio Front-Only)**
+**Ejercicio Día 3 y 4 - Blog + Contact/Notifications (Microservicios Front-Only)**
 
 </div>

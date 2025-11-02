@@ -15,9 +15,10 @@ export default function EffectsToggle({ onToggle }) {
     <button 
       className={`${styles.toggleButton} ${isActive ? styles.active : ''}`}
       onClick={handleToggle}
-      aria-label="Toggle effects"
+      aria-label="Activar efectos de animación"
+      title="Efectos de animación"
     >
-      <Sparkles size={24} />
+      <Sparkles size={20} />
     </button>
   )
 }

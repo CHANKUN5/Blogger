@@ -1,6 +1,7 @@
 import { Github, Facebook, Mail, Linkedin, Sun, Moon } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
 import { mockData } from '../data/mock'
+import StatsPanel from '../components/StatsPanel'
 import styles from '../styles/sidebar.module.css'
 
 export default function Sidebar() {
@@ -78,22 +79,6 @@ export default function Sidebar() {
       </div>
 
       <div className={styles.widget}>
-        <h4 className={styles.widgetTitle}>Seguidores</h4>
-        <div className={styles.followers}>
-          {mockData.followers.map((follower) => (
-            <img
-              key={follower.id}
-              src={follower.avatar}
-              alt={follower.name}
-              className={styles.followerAvatar}
-              title={follower.name}
-            />
-          ))}
-        </div>
-        <p className={styles.followersCount}>{mockData.followers.length} seguidores</p>
-      </div>
-
-      <div className={styles.widget}>
         <h4 className={styles.widgetTitle}>Últimos Comentarios</h4>
         <ul className={styles.latestComments}>
           {allComments.map((comment) => (
@@ -107,6 +92,8 @@ export default function Sidebar() {
           ))}
         </ul>
       </div>
+
+      <StatsPanel />
     </aside>
   )
 }

@@ -60,6 +60,24 @@
   gap: 1rem;
 }
 
+:root[data-theme="light"] .socialLinks a {
+  background: #f5e6d3;
+  color: #8f2c24;
+}
+
+:root[data-theme="light"] .socialLinks a:hover {
+  background: #e8d4b8;
+}
+
+:root[data-theme="dark"] .socialLinks a {
+  background: #F1A52F;
+  color: white;
+}
+
+:root[data-theme="dark"] .socialLinks a:hover {
+  background: #ffc04d;
+}
+
 .socialLinks a {
   display: flex;
   align-items: center;
@@ -67,14 +85,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--footer-icon-bg);
-  color: var(--footer-bg);
   transition: all 0.3s;
   text-decoration: none;
 }
 
 .socialLinks a:hover {
-  background: var(--footer-icon-hover);
   transform: translateY(-3px);
 }
 

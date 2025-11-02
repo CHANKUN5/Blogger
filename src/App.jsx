@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { ToastProvider } from './context/ToastContext'
 import { AuthProvider } from './context/AuthContext'
 import { ThemeProvider } from './context/ThemeContext'
 import Login from './pages/Login'
@@ -11,19 +12,21 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            
-            <Route element={<ProtectedRoute />}>
-              <Route element={<BlogLayout />}>
-                <Route path="/blog" element={<Posts />} />
-                <Route path="/blog/:id" element={<PostDetail />} />
+        <ToastProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              
+              <Route element={<ProtectedRoute />}>
+                <Route element={<BlogLayout />}>
+                  <Route path="/blog" element={<Posts />} />
+                  <Route path="/blog/:id" element={<PostDetail />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </ToastProvider>
       </AuthProvider>
     </ThemeProvider>
   )
